@@ -1,3 +1,10 @@
+.idea
+.gradle
+build/
+dist/
+out/
+lib/
+
 *.class
 
 # Package Files #

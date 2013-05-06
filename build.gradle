@@ -1,0 +1,13 @@
+apply plugin: "groovy"
+apply plugin: "java"
+//apply plugin: "idea"
+
+repositories() {
+    mavenCentral()
+}
+
+dependencies() {
+    groovy('org.codehaus.groovy:groovy-all:2.1.2')
+    testCompile('junit:junit:4.10@jar')
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') { transitive = false }
+}
