@@ -27,7 +27,7 @@ public class Talk implements Schedulable {
 
     @Override
     public int blocks() {
-        int size = duration / Scheduler.BLOCK_SIZE;
+        int size = duration / Scheduler.BLOCK_SIZE; // todo: this is brittle because the policies assume a certain block size
         if (size < 1) return 1;
         return size;
     }

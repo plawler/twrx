@@ -1,6 +1,7 @@
 public interface SessionPolicy {
 
-    boolean isFilled(Session session);
-    boolean acceptsLightning();
+    boolean isFilled(int blocks);
+    boolean canAddTalkToSession(Session session, Talk talk);
+//    boolean acceptsLightning();
 
 }

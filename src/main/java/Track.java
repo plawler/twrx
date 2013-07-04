@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Track {
 
-    private final List<Session> sessions;
+    private final List<Session> sessions; // perhaps a map instead?
 
     Track(List<Session> sessions) {
         this.sessions = sessions;
