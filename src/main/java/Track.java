@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,9 +9,91 @@ import java.util.List;
  */
 public class Track {
 
-    private final List<Session> sessions; // perhaps a map instead?
+    private Map<Session.Type, Session> sessionMap;
+    private Meal meal;
+    private Networking networking;
 
-    Track(List<Session> sessions) {
-        this.sessions = sessions;
+    private Track(Builder builder) {
+        this.sessionMap = builder.sessions2;
+        this.meal = builder.lunch;
+        this.networking = builder.networking;
     }
+
+    List<Schedulable> talks() {
+        List<Schedulable> talks = new ArrayList<Schedulable>();
+        for (Session session : sessionMap.values()) {
+            talks.addAll(session.schedulables());
+        }
+        return talks;
+    }
+
+    List<Schedulable> morning() {
+        return sessionMap.get(Session.Type.Morning).schedulables();
+    }
+
+    List<Schedulable> afternoon() {
+        return sessionMap.get(Session.Type.Afternoon).schedulables();
+    }
+
+    Schedulable meal() {
+        return meal;
+    }
+
+    Schedulable networking() {
+        return networking;
+    }
+
+    public static class Builder {
+        private final Map<Session.Type, Session> sessions2;
+        private final Set<Talk> available;
+        private Meal lunch;
+        private Networking networking;
+
+        public Builder(Set<Talk> talks) {
+            this.available = new HashSet<Talk>(talks);
+            this.sessions2 = new HashMap<Session.Type, Session>();
+        }
+
+        public Builder morning() {
+            Session morning = ConferenceSessionFactory.createInstance(Session.Type.Morning);
+            fill(morning);
+            sessions2.put(Session.Type.Morning, morning);
+            return this;
+        }
+
+        public Builder afternoon() {
+            Session afternoon = ConferenceSessionFactory.createInstance(Session.Type.Afternoon);
+            fill(afternoon);
+            sessions2.put(Session.Type.Afternoon, afternoon);
+            return this;
+        }
+
+        public Builder lunch() {
+            this.lunch = new Meal();
+            return this;
+        }
+
+        public Builder networking() {
+            this.networking = new Networking();
+            return this;
+        }
+
+        public Track build() {
+            return new Track(this);
+        }
+
+        private void fill(Session session) {
+            for (Talk talk : available) {
+                try {
+                    session.add(talk);
+                } catch (IllegalStateException ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+            available.removeAll(session.schedulables());
+        }
+    }
+
+
 }

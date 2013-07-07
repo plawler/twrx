@@ -3,6 +3,11 @@ class MorningSessionPolicy implements SessionPolicy {
     static final int MAX_NUM_BLOCKS = 12;
     static final int MIN_NUM_BLOCKS = MAX_NUM_BLOCKS;
 
+    @Override
+    public boolean isFilled(int blocks) {
+        return blocks == MAX_NUM_BLOCKS;
+    }
+
     public boolean canAddTalkToSession(Session session, Talk talk) {
         return !talk.isLightning() && blocksRemaining(session.blocks()) >= talk.blocks();
         // may need to do a modulo check between talk block count and difference of MAX and session

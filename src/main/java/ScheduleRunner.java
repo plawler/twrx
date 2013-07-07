@@ -7,8 +7,6 @@ import java.util.Set;
 public class ScheduleRunner {
 
     public static void main(String[] args) throws IOException {
-        Conference conference = new Conference("The 2013 ThoughWorks Conference");
-
         BufferedReader reader = new BufferedReader(new FileReader("talks.txt"));
         try {
             Set<Schedulable> talks = new HashSet<Schedulable>();
@@ -16,8 +14,8 @@ public class ScheduleRunner {
             while ((line = reader.readLine()) != null) {
                 talks.add(SchedulableFactory.createTalk(line));
             }
-//            Scheduler.schedule(conference, talks);
-            conference.displaySchedule();
+            Scheduler.schedule("The 2013 ThoughWorks Conference", talks);
+//            conference.createSchedule().display();
         }
         finally {
             reader.close();

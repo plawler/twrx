@@ -9,9 +9,5 @@ import spock.lang.Specification
  */
 class SchedulerSpec extends Specification {
 
-    def "creates a schedule for a conference"() {
-        given:
-        def morning = ConferenceSessionFactory.createInstance(Session.Type.Morning)
-        def afternoon = ConferenceSessionFactory.createInstance(Session.Type.Afternoon)
-    }
+
 }

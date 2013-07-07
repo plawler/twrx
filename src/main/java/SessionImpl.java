@@ -3,20 +3,38 @@ import java.util.List;
 
 public class SessionImpl implements Session {
 
+    private final Type type;
     private SessionPolicy policy;
     private List<Talk> talks;
 
-    SessionImpl(SessionPolicy policy) {
+    SessionImpl(Session.Type type, SessionPolicy policy) {
+        this.type = type;
         this.policy = policy;
         talks = new ArrayList<Talk>();
     }
 
-    public void addTalk(Talk talk) {
+    @Override
+    public void add(Schedulable schedulable) {
+        Talk talk = (Talk) schedulable;
         if (policy.canAddTalkToSession(this, talk)) {
             talks.add(talk);
         } else {
             throw new IllegalStateException("Session is full");
         }
+    }
+
+    @Override
+    public boolean accepting() {
+        return policy.isFilled(blocks());
+    }
+
+    @Override
+    public List<Schedulable> schedulables() {
+        List<Schedulable> schedulables = new ArrayList<Schedulable>();
+        for (Talk talk : talks) {
+            schedulables.add(talk);
+        }
+        return schedulables;
     }
 
     @Override
@@ -30,4 +48,5 @@ public class SessionImpl implements Session {
         }
         return 0;
     }
+
 }

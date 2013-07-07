@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,9 +17,19 @@ public class Conference {
 
     Conference(String name) {
         this.name = name;
+        this.tracks = new ArrayList<Track>();
     }
 
-    void displaySchedule() {
-        System.out.println("Nothing scheduled yet, bro.");
+    Schedule createSchedule() {
+        return new Schedule();
+    }
+
+    public void build(Set<Talk> talks) {
+        Set<Schedulable> scheduled = new HashSet<Schedulable>();
+        while (!scheduled.containsAll(talks)) {
+            Track track = new Track.Builder(talks).lunch().networking().build();
+            tracks.add(track);
+            scheduled.addAll(track.talks());
+        }
     }
 }
