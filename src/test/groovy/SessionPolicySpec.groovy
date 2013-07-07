@@ -6,15 +6,6 @@ class SessionPolicySpec extends Specification {
     def morning = new MorningSessionPolicy()
     def afternoon = new AfternoonSessionPolicy();
 
-    def "policy should determine if the session is filled"() {
-        expect:
-        morning.isFilled(MorningSessionPolicy.MAX_NUM_BLOCKS)
-        !morning.isFilled(MorningSessionPolicy.MAX_NUM_BLOCKS - 1)
-        afternoon.isFilled(AfternoonSessionPolicy.MIN_NUM_BLOCKS)
-        afternoon.isFilled(AfternoonSessionPolicy.MAX_NUM_BLOCKS - 1)
-        !afternoon.isFilled(AfternoonSessionPolicy.MIN_NUM_BLOCKS - 1)
-    }
-
     def "morning policy should determine if a talk can be added"() {
         setup:
         def blocksToFill = 2
@@ -31,12 +22,12 @@ class SessionPolicySpec extends Specification {
         setup:
         def durationEqualToABlock = 15
         def session = new SessionImpl(afternoon)
-        (1..(AfternoonSessionPolicy.MAX_NUM_BLOCKS - 1)).each {
+
+        (1..(AfternoonSessionPolicy.MAX_NUM_BLOCKS - 1)).each { iteration ->
             session.addTalk(new Talk("A Talk", durationEqualToABlock, false))
         }
 
         expect:
-        afternoon.isFilled(session.blocks())
         !afternoon.canAddTalkToSession(session, new Talk("Domain Driven Design", 45, false))
         afternoon.canAddTalkToSession(session, new Talk("Domain Driven Design Quickly", 5, true))
     }

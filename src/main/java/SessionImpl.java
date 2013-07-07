@@ -12,10 +12,11 @@ public class SessionImpl implements Session {
     }
 
     public void addTalk(Talk talk) {
-//        if (policy.canAddTalkToSession(this, talk)) {
-//            talks.add(talk);
-//        }
-        talks.add(talk);
+        if (policy.canAddTalkToSession(this, talk)) {
+            talks.add(talk);
+        } else {
+            throw new IllegalStateException("Session is full");
+        }
     }
 
     @Override
