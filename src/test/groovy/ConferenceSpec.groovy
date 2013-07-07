@@ -11,6 +11,7 @@ import spock.lang.Specification
 class ConferenceSpec extends Specification {
 
     @Shared talks = [] as Set
+
     def setupSpec() {
         def rawTalks = ["Writing Fast Tests Against Enterprise Rails 60min",
                 "Overdoing it in Python 45min",
@@ -37,13 +38,19 @@ class ConferenceSpec extends Specification {
         }
     }
 
-    def "conference builds a track"() {
+    def "conference builds some tracks"() {
         setup:
-        Track track = new Track.Builder(talks).morning().build()
+        def conference = new Conference("Thoughtworks Conference")
+        conference.build(talks)
 
         expect:
-        println talks.size()
-        println track.morning().size()
+        conference.tracks().size() == 2
+
+        def schedulables = [] as Set
+        conference.tracks().each { track ->
+            schedulables.addAll(track.talks())
+        }
+        schedulables.containsAll(talks)
     }
 
 

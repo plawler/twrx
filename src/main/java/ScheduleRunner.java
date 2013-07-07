@@ -14,7 +14,7 @@ public class ScheduleRunner {
             while ((line = reader.readLine()) != null) {
                 talks.add(SchedulableFactory.createTalk(line));
             }
-            Scheduler.schedule("The 2013 ThoughWorks Conference", talks);
+            Conference conference = ConferenceFactory.createConference("The 2013 ThoughWorks Conference", talks);
 //            conference.createSchedule().display();
         }
         finally {

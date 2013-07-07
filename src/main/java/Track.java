@@ -45,12 +45,12 @@ public class Track {
 
     public static class Builder {
         private final Map<Session.Type, Session> sessions2;
-        private final Set<Talk> available;
+        private final Set<Schedulable> available;
         private Meal lunch;
         private Networking networking;
 
-        public Builder(Set<Talk> talks) {
-            this.available = new HashSet<Talk>(talks);
+        public Builder(Set<Schedulable> talks) {
+            this.available = new HashSet<Schedulable>(talks);
             this.sessions2 = new HashMap<Session.Type, Session>();
         }
 
@@ -83,11 +83,11 @@ public class Track {
         }
 
         private void fill(Session session) {
-            for (Talk talk : available) {
+            for (Schedulable talk : available) {
                 try {
                     session.add(talk);
                 } catch (IllegalStateException ex) {
-                    System.out.println(ex.getMessage());
+                    // log this or change to not have to worry about the exception
                 }
 
             }

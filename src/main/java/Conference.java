@@ -20,16 +20,25 @@ public class Conference {
         this.tracks = new ArrayList<Track>();
     }
 
+    List<Track> tracks() {
+        return tracks;
+    }
+
     Schedule createSchedule() {
         return new Schedule();
     }
 
-    public void build(Set<Talk> talks) {
-        Set<Schedulable> scheduled = new HashSet<Schedulable>();
-        while (!scheduled.containsAll(talks)) {
-            Track track = new Track.Builder(talks).lunch().networking().build();
+    void build(Set<Schedulable> talks) {
+        Set<Schedulable> remaining = new HashSet<Schedulable>(talks);
+        while (!remaining.isEmpty()) {
+            Track track = new Track.Builder(remaining)
+                    .morning()
+                    .afternoon()
+                    .lunch()
+                    .networking()
+                    .build();
             tracks.add(track);
-            scheduled.addAll(track.talks());
+            remaining.removeAll(track.talks());
         }
     }
 }
