@@ -23,7 +23,6 @@ public class SessionImpl implements Session {
         }
     }
 
-    @Override
     public boolean accepting() {
         return policy.isFilled(blocks());
     }

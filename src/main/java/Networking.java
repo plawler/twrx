@@ -19,7 +19,7 @@ public class Networking implements Schedulable {
 
     @Override
     public String getName() {
-        return "Networking";
+        return "Networking Event";
     }
 
 }

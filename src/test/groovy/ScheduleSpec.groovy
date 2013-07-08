@@ -11,8 +11,9 @@ import spock.lang.Specification
  */
 class ScheduleSpec extends Specification {
 
-    @Shared conference
+    @Shared Conference conference
     def setupSpec() {
+        def talks = [] as Set
         def rawTalks = ["Writing Fast Tests Against Enterprise Rails 60min",
                 "Overdoing it in Python 45min",
                 "Lua for the Masses 30min",
@@ -53,6 +54,9 @@ class ScheduleSpec extends Specification {
 
         when:
         schedule.createSchedule()
+
+        then:
+        schedule.display()
 
     }
 

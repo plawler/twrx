@@ -17,9 +17,8 @@ public class Scheduled {
     private final boolean talk;
     private final SimpleDateFormat format = new SimpleDateFormat("hh:mma");
 
-    Scheduled(Schedulable schedulable, Calendar calendar) {
-        calendar.add(Calendar.MINUTE, schedulable.getDuration());
-        this.startsAt = calendar.getTime();
+    Scheduled(Schedulable schedulable, Date startsAt) {
+        this.startsAt = startsAt;
         this.name = schedulable.getName();
         this.duration = schedulable.getDuration();
         this.talk = schedulable instanceof Talk;

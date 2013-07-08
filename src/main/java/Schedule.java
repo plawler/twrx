@@ -23,11 +23,21 @@ public class Schedule {
             List<Scheduled> scheduledList = new ArrayList<Scheduled>();
             Calendar calendar = conference.dayBegins();
             for (Schedulable schedulable : track.forScheduling()) {
-                scheduledList.add(new Scheduled(schedulable, calendar));
+                scheduledList.add(new Scheduled(schedulable, calendar.getTime()));
+                calendar.add(Calendar.MINUTE, schedulable.getDuration());
             }
-            scheduledTracks.put("Track" + trackCount, scheduledList);
+            scheduledTracks.put("Track " + trackCount, scheduledList);
             trackCount++;
         }
     }
 
+    public void display() {
+        for (String key : scheduledTracks.keySet()) {
+            System.out.println(key + ":");
+            for (Scheduled scheduled : scheduledTracks.get(key)) {
+                System.out.println(scheduled.toString());
+            }
+            System.out.println();
+        }
+    }
 }
