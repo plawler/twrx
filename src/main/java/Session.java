@@ -8,6 +8,6 @@ public interface Session {
 
     public int blocks();
     public void add(Schedulable schedulable);
-    public boolean accepting();
+//    public boolean accepting();
 
 }

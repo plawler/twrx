@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,7 +9,25 @@ import java.util.List;
  */
 public class Schedule {
 
-    public void display() {
-        System.out.println("Nothing yet to display, bro.");
+    private final Conference conference;
+    private Map<String, List<Scheduled>> scheduledTracks;
+
+    Schedule(Conference conference) {
+        this.conference = conference;
+        this.scheduledTracks = new HashMap<String, List<Scheduled>>();
     }
+
+    void createSchedule() {
+        int trackCount = 1;
+        for (Track track : conference.tracks()) {
+            List<Scheduled> scheduledList = new ArrayList<Scheduled>();
+            Calendar calendar = conference.dayBegins();
+            for (Schedulable schedulable : track.forScheduling()) {
+                scheduledList.add(new Scheduled(schedulable, calendar));
+            }
+            scheduledTracks.put("Track" + trackCount, scheduledList);
+            trackCount++;
+        }
+    }
+
 }

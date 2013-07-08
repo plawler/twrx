@@ -15,7 +15,7 @@ public class ScheduleRunner {
                 talks.add(SchedulableFactory.createTalk(line));
             }
             Conference conference = ConferenceFactory.createConference("The 2013 ThoughWorks Conference", talks);
-//            conference.createSchedule().display();
+            conference.createSchedule();
         }
         finally {
             reader.close();

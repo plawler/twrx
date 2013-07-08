@@ -1,16 +1,17 @@
 import spock.lang.Shared
 import spock.lang.Specification
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: plawler
  * Date: 7/7/13
- * Time: 1:34 PM
+ * Time: 5:33 PM
  * To change this template use File | Settings | File Templates.
  */
-class ConferenceSpec extends Specification {
+class ScheduleSpec extends Specification {
 
-    @Shared talks = [] as Set
+    @Shared conference
     def setupSpec() {
         def rawTalks = ["Writing Fast Tests Against Enterprise Rails 60min",
                 "Overdoing it in Python 45min",
@@ -35,22 +36,24 @@ class ConferenceSpec extends Specification {
         rawTalks.each { raw ->
             talks.add(SchedulableFactory.createTalk(raw))
         }
-    }
 
-    def "conference builds some tracks"() {
-        setup:
-        def conference = new Conference("Thoughtworks Conference")
+        conference = new Conference("Thoughtworks Conference")
         conference.build(talks)
 
-        expect:
-        conference.tracks().size() == 2
-
-        def schedulables = [] as Set
-        conference.tracks().each { track ->
-            schedulables.addAll(track.talks())
-        }
-        schedulables.containsAll(talks)
     }
 
+    def "test some date time stuff"() {
+        setup:
+        def cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, 9)
+        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.SECOND, 0)
+
+        def schedule = new Schedule(conference)
+
+        when:
+        schedule.createSchedule()
+
+    }
 
 }

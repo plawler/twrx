@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: plawler
@@ -7,7 +11,25 @@
  */
 public class Scheduled {
 
-    // takes a schedulable and adds it to a place in time
-    // this would include a Talk, Lunch, or Networking event
+    private final Date startsAt;
+    private final String name;
+    private final int duration;
+    private final boolean talk;
+    private final SimpleDateFormat format = new SimpleDateFormat("hh:mma");
+
+    Scheduled(Schedulable schedulable, Calendar calendar) {
+        calendar.add(Calendar.MINUTE, schedulable.getDuration());
+        this.startsAt = calendar.getTime();
+        this.name = schedulable.getName();
+        this.duration = schedulable.getDuration();
+        this.talk = schedulable instanceof Talk;
+    }
+
+    public String toString() {
+        String val = format.format(this.startsAt) + " " + name;
+        if (talk)
+            val += " " + duration + "min";
+        return val;
+    }
 
 }

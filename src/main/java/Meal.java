@@ -17,4 +17,9 @@ public class Meal implements Schedulable {
         return 60;
     }
 
+    @Override
+    public String getName() {
+        return "Lunch";
+    }
+
 }

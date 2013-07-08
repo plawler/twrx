@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +10,9 @@ import java.util.Set;
 public class Conference {
 
     private String name;
+    private Schedule schedule;
     private List<Track> tracks;
+
 
     Conference(String name) {
         this.name = name;
@@ -24,8 +23,11 @@ public class Conference {
         return tracks;
     }
 
-    Schedule createSchedule() {
-        return new Schedule();
+    void createSchedule() {
+        if (schedule == null) {
+            schedule = new Schedule(this);
+            schedule.createSchedule();
+        }
     }
 
     void build(Set<Schedulable> talks) {
@@ -40,5 +42,17 @@ public class Conference {
             tracks.add(track);
             remaining.removeAll(track.talks());
         }
+    }
+
+    Calendar dayBegins() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar;
+    }
+
+    void displaySchedule() {
+
     }
 }

@@ -16,4 +16,10 @@ public class Networking implements Schedulable {
     public int getDuration() {
         return 0;
     }
+
+    @Override
+    public String getName() {
+        return "Networking";
+    }
+
 }

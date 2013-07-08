@@ -35,12 +35,21 @@ public class Track {
         return sessionMap.get(Session.Type.Afternoon).schedulables();
     }
 
-    Schedulable meal() {
+    Schedulable lunch() {
         return meal;
     }
 
     Schedulable networking() {
         return networking;
+    }
+
+    public List<Schedulable> forScheduling() {
+        List<Schedulable> scheduleables = new ArrayList<Schedulable>();
+        scheduleables.addAll(morning());
+        scheduleables.add(lunch());
+        scheduleables.addAll(afternoon());
+        scheduleables.add(networking());
+        return scheduleables;
     }
 
     public static class Builder {
@@ -87,9 +96,8 @@ public class Track {
                 try {
                     session.add(talk);
                 } catch (IllegalStateException ex) {
-                    // log this or change to not have to worry about the exception
+                    // todo: log this or change to not have to worry about the exception
                 }
-
             }
             available.removeAll(session.schedulables());
         }
