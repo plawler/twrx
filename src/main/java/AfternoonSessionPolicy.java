@@ -12,7 +12,7 @@ class AfternoonSessionPolicy implements SessionPolicy {
 
     @Override
     public boolean canAddTalkToSession(Session session, Talk talk) {
-        return minutesRemaining(session.scheduledAmount()) >= talk.getDuration();
+        return remaining(session.scheduledAmount()) >= talk.getDuration();
     }
 
     @Override
@@ -20,8 +20,8 @@ class AfternoonSessionPolicy implements SessionPolicy {
         return duration;
     }
 
-    private int minutesRemaining(int blocks) {
-        return duration - blocks;
+    private int remaining(int minutes) {
+        return duration - minutes;
     }
 
 }
