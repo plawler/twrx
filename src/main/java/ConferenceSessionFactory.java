@@ -7,7 +7,7 @@ public class ConferenceSessionFactory {
         } else {
             policy = new AfternoonSessionPolicy();
         }
-        return new SessionImpl(type, policy);
+        return new SessionImpl(policy);
     }
 
 }

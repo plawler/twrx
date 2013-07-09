@@ -1,14 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SessionImpl implements Session {
 
-    private final Type type;
     private SessionPolicy policy;
     private List<Talk> talks;
 
-    SessionImpl(Session.Type type, SessionPolicy policy) {
-        this.type = type;
+    SessionImpl(SessionPolicy policy) {
         this.policy = policy;
         talks = new ArrayList<Talk>();
     }
@@ -29,11 +28,12 @@ public class SessionImpl implements Session {
 
     @Override
     public List<Schedulable> schedulables() {
-        List<Schedulable> schedulables = new ArrayList<Schedulable>();
+        List<Talk> schedulables = new ArrayList<Talk>();
         for (Talk talk : talks) {
             schedulables.add(talk);
         }
-        return schedulables;
+        Collections.sort(schedulables);
+        return (List)schedulables; // i know, i know but can guarantee that schedulable types are the only entries here
     }
 
     @Override

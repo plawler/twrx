@@ -16,6 +16,7 @@ public class ScheduleRunner {
             }
             Conference conference = ConferenceFactory.createConference("The 2013 ThoughWorks Conference", talks);
             conference.createSchedule();
+            conference.displaySchedule();
         }
         finally {
             reader.close();
