@@ -22,10 +22,6 @@ public class SessionImpl implements Session {
         }
     }
 
-    public boolean accepting() {
-        return policy.isFilled(blocks());
-    }
-
     @Override
     public List<Schedulable> schedulables() {
         List<Talk> schedulables = new ArrayList<Talk>();
@@ -37,11 +33,11 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public int blocks() {
+    public int scheduledAmount() {
         if (!talks.isEmpty()) {
             int count = 0;
             for (Talk talk : talks) {
-                count += talk.blocks(); // this maybe should be talks.minutes
+                count += talk.getDuration(); // this maybe should be talks.minutes
             }
             return count;
         }

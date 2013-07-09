@@ -34,7 +34,6 @@ class SchedulableFactorySpec extends Specification {
         expect:
         talk.name == "Ruby on Rails: Why We Should Move On"
         talk.duration == 60
-        talk.blocks() == 4
     }
 
     def "create new lightning talk"() {
@@ -45,6 +44,5 @@ class SchedulableFactorySpec extends Specification {
         talk.lightning
         talk.name == "Rails for Python Developers"
         talk.duration == 5
-        talk.blocks() == 1
     }
 }

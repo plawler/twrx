@@ -26,13 +26,6 @@ public class Talk implements Schedulable, Comparable<Talk> {
     }
 
     @Override
-    public int blocks() {
-        int size = duration / Scheduler.BLOCK_SIZE; // todo: this is brittle because the policies assume a certain block size
-        if (size < 1) return 1;
-        return size;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

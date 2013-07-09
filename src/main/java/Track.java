@@ -59,7 +59,7 @@ public class Track {
         private Networking networking;
 
         public Builder(Set<Schedulable> talks) {
-            this.available = new HashSet<Schedulable>(talks);
+            this.available = new HashSet<Schedulable>(talks); // defensive copy
             this.sessions2 = new HashMap<Session.Type, Session>();
         }
 

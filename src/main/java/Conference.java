@@ -9,6 +9,9 @@ import java.util.*;
  */
 public class Conference {
 
+    public static final int MORNING_SESSION_DURATION_MINUTES = 180;
+    public static final int AFTERNOON_SESSION_DURATION_MINUTES = 240;
+
     private String name;
     private Schedule schedule;
     private List<Track> tracks;
@@ -24,10 +27,8 @@ public class Conference {
     }
 
     void createSchedule() {
-        if (schedule == null) {
-            schedule = new Schedule(this);
-            schedule.createSchedule();
-        }
+        schedule = new Schedule(this);
+        schedule.createSchedule();
     }
 
     void build(Set<Schedulable> talks) {

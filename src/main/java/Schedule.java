@@ -32,12 +32,23 @@ public class Schedule {
     }
 
     public void display() {
-        for (String key : scheduledTracks.keySet()) {
+        for (String key : sortedKeys()) {
             System.out.println(key + ":");
             for (Scheduled scheduled : scheduledTracks.get(key)) {
                 System.out.println(scheduled.toString());
             }
             System.out.println();
         }
+    }
+
+    private List<String> sortedKeys() {
+        List<String> keys = new ArrayList<String>(scheduledTracks.keySet());
+        Collections.sort(keys, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        return keys;
     }
 }

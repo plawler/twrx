@@ -8,11 +8,6 @@
 public class Networking implements Schedulable {
 
     @Override
-    public int blocks() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public int getDuration() {
         return 0;
     }

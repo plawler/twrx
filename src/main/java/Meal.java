@@ -8,11 +8,6 @@
 public class Meal implements Schedulable {
 
     @Override
-    public int blocks() {
-        return 4;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public int getDuration() {
         return 60;
     }

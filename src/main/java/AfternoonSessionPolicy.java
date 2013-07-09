@@ -1,20 +1,27 @@
 class AfternoonSessionPolicy implements SessionPolicy {
 
-    static final int MIN_NUM_BLOCKS = 12;
-    static final int MAX_NUM_BLOCKS = 16;
+    private final int duration;
 
-    @Override
-    public boolean isFilled(int blocks) {
-        return blocks >= MIN_NUM_BLOCKS && blocks <= MAX_NUM_BLOCKS;
+    private AfternoonSessionPolicy(int duration) {
+        this.duration = duration;
+    }
+
+    public static SessionPolicy createPolicy(int durationInMinutes) {
+        return new AfternoonSessionPolicy(durationInMinutes);
     }
 
     @Override
     public boolean canAddTalkToSession(Session session, Talk talk) {
-        return blocksRemaining(session.blocks()) >= talk.blocks();
+        return minutesRemaining(session.scheduledAmount()) >= talk.getDuration();
     }
 
-    private int blocksRemaining(int blocks) {
-        return MAX_NUM_BLOCKS - blocks;
+    @Override
+    public int totalDurationMinutes() {
+        return duration;
+    }
+
+    private int minutesRemaining(int blocks) {
+        return duration - blocks;
     }
 
 }

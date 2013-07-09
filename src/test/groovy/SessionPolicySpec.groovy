@@ -2,23 +2,14 @@ import spock.lang.Specification
 
 class SessionPolicySpec extends Specification {
 
-    def morning = new MorningSessionPolicy()
-    def afternoon = new AfternoonSessionPolicy();
-
-    def "policy should determine if the session is filled"() {
-        expect:
-        morning.isFilled(MorningSessionPolicy.MAX_NUM_BLOCKS)
-        !morning.isFilled(MorningSessionPolicy.MAX_NUM_BLOCKS - 1)
-        afternoon.isFilled(AfternoonSessionPolicy.MIN_NUM_BLOCKS)
-        afternoon.isFilled(AfternoonSessionPolicy.MAX_NUM_BLOCKS - 1)
-        !afternoon.isFilled(AfternoonSessionPolicy.MIN_NUM_BLOCKS - 1)
-    }
+    def morning = MorningSessionPolicy.createPolicy(Conference.MORNING_SESSION_DURATION_MINUTES)
+    def afternoon = AfternoonSessionPolicy.createPolicy(Conference.AFTERNOON_SESSION_DURATION_MINUTES);
 
     def "morning policy should determine if a talk can be added"() {
         setup:
-        def blocksToFill = 2
+        def timeToFill = 30
         def session = Mock(Session)
-        session.blocks() >> MorningSessionPolicy.MAX_NUM_BLOCKS - blocksToFill
+        session.scheduledAmount() >> morning.totalDurationMinutes() - timeToFill
 
         expect:
         !morning.canAddTalkToSession(session, new Talk("Domain Driven Design", 45, false))
@@ -28,11 +19,10 @@ class SessionPolicySpec extends Specification {
 
     def "afternoon policy should determine if a talk can be added"() {
         setup:
-        def durationEqualToABlock = 15
         def session = new SessionImpl(afternoon)
 
-        (1..(AfternoonSessionPolicy.MAX_NUM_BLOCKS - 1)).each {
-            session.add(new Talk("A Talk", durationEqualToABlock, false))
+        (1..5).each {
+            session.add(new Talk("A Talk", 45, false))
         }
 
         expect:

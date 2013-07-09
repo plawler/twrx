@@ -6,8 +6,7 @@ public interface Session {
 
     List<Schedulable> schedulables();
 
-    public int blocks();
+    public int scheduledAmount();
     public void add(Schedulable schedulable);
-//    public boolean accepting();
 
 }
