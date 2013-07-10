@@ -11,7 +11,8 @@ class SessionSpec extends Specification {
 
     def "should return a list of talks with lightning ordered last"() {
         setup:
-        def session = new SessionImpl(new AfternoonSessionPolicy());
+        def session = new SessionImpl(SessionPolicy.createPolicy(Conference.AFTERNOON_SESSION_DURATION_MINUTES,
+                Session.Type.Afternoon))
         session.add(new Talk("Fast Talk", 5, true))
         session.add(new Talk("Talk One", 60, false))
         session.add(new Talk("Talk Two", 60, false))

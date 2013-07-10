@@ -64,14 +64,16 @@ public class Track {
         }
 
         public Builder morning() {
-            Session morning = ConferenceSessionFactory.createInstance(Session.Type.Morning);
+            Session morning = ConferenceSessionFactory.createInstance(Session.Type.Morning,
+                    Conference.MORNING_SESSION_DURATION_MINUTES);
             fill(morning);
             sessions2.put(Session.Type.Morning, morning);
             return this;
         }
 
         public Builder afternoon() {
-            Session afternoon = ConferenceSessionFactory.createInstance(Session.Type.Afternoon);
+            Session afternoon = ConferenceSessionFactory.createInstance(Session.Type.Afternoon,
+                    Conference.AFTERNOON_SESSION_DURATION_MINUTES);
             fill(afternoon);
             sessions2.put(Session.Type.Afternoon, afternoon);
             return this;

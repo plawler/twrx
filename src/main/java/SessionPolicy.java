@@ -1,8 +1,28 @@
-import java.util.Comparator;
+public abstract class SessionPolicy {
 
-public interface SessionPolicy {
+    protected final int duration;
 
-    boolean canAddTalkToSession(Session session, Talk talk);
-    int totalDurationMinutes();
+    public SessionPolicy(int duration) {
+        this.duration = duration;
+    }
+
+    public static SessionPolicy createPolicy(int durationInMinutes, Session.Type type) {
+        if (type.equals(Session.Type.Morning))
+            return new MorningSessionPolicy(durationInMinutes);
+        else if (type.equals(Session.Type.Afternoon)) {
+            return new AfternoonSessionPolicy(durationInMinutes);
+        }
+        throw new IllegalArgumentException("The session type is not recognized");
+    }
+
+    public int totalDurationMinutes() {
+        return duration;
+    }
+
+    protected int remaining(int assigned) {
+        return duration - assigned;
+    }
+
+    abstract boolean canAddTalkToSession(Session session, Talk talk);
 
 }

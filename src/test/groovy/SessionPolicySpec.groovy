@@ -2,8 +2,8 @@ import spock.lang.Specification
 
 class SessionPolicySpec extends Specification {
 
-    def morning = MorningSessionPolicy.createPolicy(Conference.MORNING_SESSION_DURATION_MINUTES)
-    def afternoon = AfternoonSessionPolicy.createPolicy(Conference.AFTERNOON_SESSION_DURATION_MINUTES);
+    def morning = SessionPolicy.createPolicy(Conference.MORNING_SESSION_DURATION_MINUTES, Session.Type.Morning)
+    def afternoon = SessionPolicy.createPolicy(Conference.AFTERNOON_SESSION_DURATION_MINUTES, Session.Type.Afternoon);
 
     def "morning policy should determine if a talk can be added"() {
         setup:

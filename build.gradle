@@ -1,6 +1,9 @@
 apply plugin: "groovy"
 apply plugin: "java"
-apply plugin: "idea"
+apply plugin: "application"
+//apply plugin: "idea"
+
+mainClassName = "ScheduleRunner"
 
 repositories() {
     mavenCentral()
@@ -9,4 +12,11 @@ repositories() {
 dependencies() {
     groovy('org.codehaus.groovy:groovy-all:2.1.2')
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0')
+}
+
+task includeFiles {
+
+    File input = file("talks.txt")
+
+
 }
