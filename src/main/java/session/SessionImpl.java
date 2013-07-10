@@ -1,9 +1,6 @@
 package session;
 
 import schedulable.Schedulable;
-import schedulable.Talk;
-import session.Session;
-import session.SessionPolicy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +28,7 @@ public class SessionImpl implements Session {
     @Override
     public List<Schedulable> schedulables() {
         Collections.sort(talks);
-        return talks; // i know, i know but can guarantee that schedulable types are the only entries here
+        return talks;
     }
 
     @Override
