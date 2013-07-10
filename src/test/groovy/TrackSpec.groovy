@@ -1,3 +1,5 @@
+import conference.Track
+import schedulable.Talk
 import spock.lang.Shared
 import spock.lang.Specification
 

@@ -1,3 +1,8 @@
+package schedulable;
+
+import schedulable.Schedulable;
+import schedulable.Talk;
+
 public class SchedulableFactory {
 
     public static Schedulable createTalk(String talk) {

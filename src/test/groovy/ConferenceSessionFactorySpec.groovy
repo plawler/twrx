@@ -1,3 +1,6 @@
+import conference.Conference
+import session.ConferenceSessionFactory
+import session.Session
 import spock.lang.Specification
 
 /**

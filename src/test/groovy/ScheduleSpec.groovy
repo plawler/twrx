@@ -1,3 +1,6 @@
+import conference.Conference
+import conference.Schedule
+import schedulable.SchedulableFactory
 import spock.lang.Shared
 import spock.lang.Specification
 

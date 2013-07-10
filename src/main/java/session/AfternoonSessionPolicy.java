@@ -1,3 +1,7 @@
+package session;
+
+import schedulable.Schedulable;
+
 class AfternoonSessionPolicy extends SessionPolicy {
 
     AfternoonSessionPolicy(int duration) {
@@ -5,7 +9,7 @@ class AfternoonSessionPolicy extends SessionPolicy {
     }
 
     @Override
-    public boolean canAddTalkToSession(Session session, Talk talk) {
+    public boolean canAddTalkToSession(Session session, Schedulable talk) {
         return remaining(session.scheduledAmount()) >= talk.getDuration();
     }
 

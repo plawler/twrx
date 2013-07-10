@@ -1,3 +1,5 @@
+package session;
+
 public class ConferenceSessionFactory {
 
     public static Session createInstance(Session.Type type, int sessionDuration) {

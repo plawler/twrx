@@ -1,3 +1,11 @@
+package conference;
+
+import schedulable.Meal;
+import schedulable.Networking;
+import schedulable.Schedulable;
+import session.ConferenceSessionFactory;
+import session.Session;
+
 import java.util.*;
 
 /**

@@ -1,4 +1,6 @@
-public class Talk implements Schedulable, Comparable<Talk> {
+package schedulable;
+
+public class Talk implements Schedulable {
 
     private final String name;
     private final int duration;
@@ -48,7 +50,7 @@ public class Talk implements Schedulable, Comparable<Talk> {
     }
 
     @Override
-    public int compareTo(Talk talk) {
-        return Boolean.valueOf(this.isLightning()).compareTo(talk.isLightning());
+    public int compareTo(Schedulable talk) {
+        return Boolean.valueOf(this.isLightning()).compareTo(((Talk)talk).isLightning());
     }
 }

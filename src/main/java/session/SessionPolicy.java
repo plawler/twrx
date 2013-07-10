@@ -1,3 +1,7 @@
+package session;
+
+import schedulable.Schedulable;
+
 public abstract class SessionPolicy {
 
     protected final int duration;
@@ -23,6 +27,6 @@ public abstract class SessionPolicy {
         return duration - assigned;
     }
 
-    abstract boolean canAddTalkToSession(Session session, Talk talk);
+    abstract boolean canAddTalkToSession(Session session, Schedulable talk);
 
 }

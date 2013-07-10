@@ -1,3 +1,8 @@
+import conference.Conference
+import schedulable.Talk
+import session.Session
+import session.SessionImpl
+import session.SessionPolicy
 import spock.lang.Specification
 
 class SessionPolicySpec extends Specification {

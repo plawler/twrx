@@ -1,3 +1,7 @@
+package conference;
+
+import schedulable.Schedulable;
+
 import java.util.Set;
 
 /**

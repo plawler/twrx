@@ -1,3 +1,8 @@
+package conference;
+
+import schedulable.Schedulable;
+import schedulable.SchedulableFactory;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
