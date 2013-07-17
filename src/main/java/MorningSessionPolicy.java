@@ -25,6 +25,4 @@ class MorningSessionPolicy implements SessionPolicy {
         return duration - blocks;
     }
 
-
-
 }
