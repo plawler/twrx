@@ -20,7 +20,6 @@ public class Conference {
     private Schedule schedule;
     private List<Track> tracks;
 
-
     Conference(String name) {
         this.name = name;
         this.tracks = new ArrayList<Track>();
@@ -60,4 +59,5 @@ public class Conference {
     void displaySchedule() {
         schedule.display();
     }
+
 }
