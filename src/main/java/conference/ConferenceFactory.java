@@ -13,7 +13,6 @@ import java.util.Set;
  */
 public class ConferenceFactory {
 
-
     public static Conference createConference(String name, Set<Schedulable> talks) {
         Conference conference = new Conference(name);
         conference.build(talks);
