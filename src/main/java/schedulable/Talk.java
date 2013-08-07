@@ -1,5 +1,8 @@
 package schedulable;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Talk implements Schedulable {
 
     private final String name;
@@ -17,6 +20,15 @@ public class Talk implements Schedulable {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Date canBeginAt() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
     }
 
     public int getDuration() {
@@ -49,8 +61,14 @@ public class Talk implements Schedulable {
         return result;
     }
 
-    @Override
-    public int compareTo(Schedulable talk) {
-        return Boolean.valueOf(this.isLightning()).compareTo(((Talk)talk).isLightning());
+    public int compareTo(Schedulable schedulable) {
+        Talk talk = (Talk) schedulable;
+        int lightningCompare = Boolean.valueOf(this.isLightning()).compareTo(talk.isLightning());
+        if (lightningCompare == 0) {
+            return this.name.compareTo(talk.getName());
+        }
+        else
+            return lightningCompare;
     }
+
 }

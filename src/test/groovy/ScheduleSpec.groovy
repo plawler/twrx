@@ -49,7 +49,7 @@ class ScheduleSpec extends Specification {
     def "test some date time stuff"() {
         setup:
         def cal = Calendar.getInstance()
-        cal.set(Calendar.HOUR_OF_DAY, 9)
+        cal.set(Calendar.HOUR_OF_DAY, 8)
         cal.set(Calendar.MINUTE, 0)
         cal.set(Calendar.SECOND, 0)
 

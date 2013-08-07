@@ -19,7 +19,7 @@ class SessionPolicySpec extends Specification {
         expect:
         !morning.canAddTalkToSession(session, new Talk("Domain Driven Design", 45, false))
         morning.canAddTalkToSession(session, new Talk("Domain Driven Design", 30, false))
-        !morning.canAddTalkToSession(session, new Talk("Domain Driven Design Quickly", 5, true))
+        morning.canAddTalkToSession(session, new Talk("Domain Driven Design Quickly", 5, true))
     }
 
     def "afternoon policy should determine if a talk can be added"() {

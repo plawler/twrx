@@ -1,8 +1,6 @@
-import conference.Conference
 import schedulable.Talk
-import session.Session
+import session.AfternoonSessionPolicy
 import session.SessionImpl
-import session.SessionPolicy
 import spock.lang.Specification
 
 /**
@@ -16,8 +14,7 @@ class SessionSpec extends Specification {
 
     def "should return a list of talks with lightning ordered last"() {
         setup:
-        def session = new SessionImpl(SessionPolicy.createPolicy(Conference.AFTERNOON_SESSION_DURATION_MINUTES,
-                Session.Type.Afternoon))
+        def session = new SessionImpl(new AfternoonSessionPolicy(240));
         session.add(new Talk("Fast Talk", 5, true))
         session.add(new Talk("Talk One", 60, false))
         session.add(new Talk("Talk Two", 60, false))

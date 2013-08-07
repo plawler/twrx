@@ -1,6 +1,7 @@
 package schedulable;
 
-import schedulable.Schedulable;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +23,16 @@ public class Networking implements Schedulable {
     }
 
     @Override
+    public Date canBeginAt() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
+    }
+
+    @Override
     public int compareTo(Schedulable o) {
-        return 0;
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -22,10 +22,18 @@ public class Scheduled {
     private final SimpleDateFormat format = new SimpleDateFormat("hh:mma");
 
     Scheduled(Schedulable schedulable, Date startsAt) {
-        this.startsAt = startsAt;
+        if (startsAt.before(schedulable.canBeginAt())) {
+            this.startsAt = schedulable.canBeginAt();
+        } else {
+            this.startsAt = startsAt;
+        }
         this.name = schedulable.getName();
         this.duration = schedulable.getDuration();
         this.talk = schedulable instanceof Talk;
+    }
+
+    public Date startsAt() {
+        return startsAt;
     }
 
     public String toString() {

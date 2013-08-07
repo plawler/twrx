@@ -51,7 +51,7 @@ public class Track {
         return networking;
     }
 
-    public List<Schedulable> forScheduling() {
+    public List<Schedulable> schedulables() {
         List<Schedulable> scheduleables = new ArrayList<Schedulable>();
         scheduleables.addAll(morning());
         scheduleables.add(lunch());
@@ -67,7 +67,7 @@ public class Track {
         private Networking networking;
 
         public Builder(Set<Schedulable> talks) {
-            this.available = new HashSet<Schedulable>(talks); // defensive copy
+            this.available = new TreeSet<Schedulable>(talks); // defensive copy
             this.sessions2 = new HashMap<Session.Type, Session>();
         }
 

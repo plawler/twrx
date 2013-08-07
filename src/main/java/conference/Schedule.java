@@ -26,9 +26,10 @@ public class Schedule {
         for (Track track : conference.tracks()) {
             List<Scheduled> scheduledList = new ArrayList<Scheduled>();
             Calendar calendar = conference.dayBegins();
-            for (Schedulable schedulable : track.forScheduling()) {
-                scheduledList.add(new Scheduled(schedulable, calendar.getTime()));
-                calendar.add(Calendar.MINUTE, schedulable.getDuration());
+            for (Schedulable schedulable : track.schedulables()) {
+                Scheduled scheduled = new Scheduled(schedulable, calendar.getTime());
+                scheduledList.add(scheduled);
+                calendar.add(Calendar.MINUTE, schedulable.getDuration() + diff(calendar.getTime(), scheduled.startsAt()));
             }
             scheduledTracks.put("Track " + trackCount, scheduledList);
             trackCount++;
@@ -54,5 +55,10 @@ public class Schedule {
             }
         });
         return keys;
+    }
+
+    private int diff(Date current, Date scheduled) {
+        Long diff = Long.valueOf((scheduled.getTime() - current.getTime()) / 60000);
+        return diff.intValue();
     }
 }
