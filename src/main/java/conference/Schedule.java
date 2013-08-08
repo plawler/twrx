@@ -29,7 +29,7 @@ public class Schedule {
             for (Schedulable schedulable : track.schedulables()) {
                 Scheduled scheduled = new Scheduled(schedulable, calendar.getTime());
                 scheduledList.add(scheduled);
-                calendar.add(Calendar.MINUTE, schedulable.getDuration() + diff(calendar.getTime(), scheduled.startsAt()));
+                calendar.add(Calendar.MINUTE, schedulable.getDuration() + diffMinutes(calendar.getTime(), scheduled.startsAt()));
             }
             scheduledTracks.put("Track " + trackCount, scheduledList);
             trackCount++;
@@ -57,7 +57,7 @@ public class Schedule {
         return keys;
     }
 
-    private int diff(Date current, Date scheduled) {
+    private int diffMinutes(Date current, Date scheduled) {
         Long diff = Long.valueOf((scheduled.getTime() - current.getTime()) / 60000);
         return diff.intValue();
     }
